@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class HomeWork2 {
+public class TestHomeWork2 {
 
 	public static void main(String[] args) throws InterruptedException {
 		
