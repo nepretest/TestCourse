@@ -11,14 +11,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 public class TestHomeWork2 {
 
 	public static void main(String[] args) throws InterruptedException {
-		
+
 		// Set up
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
 		WebDriver driver;
 		driver = new ChromeDriver();
 		driver.manage().window().maximize();
 		String testURL = "http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/";
-		
+
 		// Script A
 		driver.navigate().to(testURL);
 		WebElement emailField = driver.findElement(By.id("email"));
@@ -30,7 +30,7 @@ public class TestHomeWork2 {
 		WebElement loginBtn = driver.findElement(By.name("submitLogin"));
 		loginBtn.click();
 		Thread.sleep(1000);
-		
+
 		// Script B
 		WebElement navMenu = driver.findElement(By.id("nav-sidebar"));
 		List<WebElement> allElements = navMenu.findElements(By.tagName("a"));
@@ -42,7 +42,7 @@ public class TestHomeWork2 {
 			}
 		}
 
-		System.out.println(elements);
+		System.out.println(elements + "\n");
 
 		for (String e : elements) {
 			driver.findElement(By.linkText(e)).click();
@@ -57,10 +57,13 @@ public class TestHomeWork2 {
 			String title2 = driver.getTitle();
 
 			if (title2.equals(title1)) {
-				System.out.println("Page refresh is successful");
+				System.out.println("Page refresh is successful\n");
 			} else {
-				System.out.println("Page refresh failure, expected title is " + title1 + " but actual title is " + title2);
+				System.out.println(
+						"Page refresh failure, expected title is " + title1 + " but actual title is " + title2 + "\n");
 			}
 		}
+
+		System.out.println("Test finished");
 	}
 }
