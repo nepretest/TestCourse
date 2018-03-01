@@ -65,5 +65,7 @@ public class TestHomeWork2 {
 		}
 
 		System.out.println("Test finished");
+		
+		driver.quit();
 	}
 }
