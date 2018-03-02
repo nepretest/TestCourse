@@ -21,6 +21,7 @@ public class TestHomeWork2_Script1 {
 		// Logging in
 		ap.loginAdminPanel(loginUrl, password);
 		
+		driver.quit();
 	}
 
 }
