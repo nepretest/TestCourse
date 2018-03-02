@@ -3,35 +3,35 @@ package com.qatestlab.prestashop;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-public class TestHomeWork2 {
+public class TestHomeWork2_Script2 {
 
-	public static void main(String[] args) throws InterruptedException {
+	public static void main(String[] args) {
 
 		// Set up
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
-		WebDriver driver;
-		driver = new ChromeDriver();
+		WebDriver driver = new ChromeDriver();
+		GenericMethods gens = new GenericMethods(driver);
+		Logger log = LogManager.getLogger(TestHomeWork2_Script2.class.getName());
+		AdminPanel ap = new AdminPanel(driver, log);
 		driver.manage().window().maximize();
 		String testURL = "http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/";
-
-		// Script A
-		driver.navigate().to(testURL);
-		WebElement emailField = driver.findElement(By.id("email"));
-		emailField.sendKeys("webinar.test@gmail.com");
-
-		WebElement passwordField = driver.findElement(By.id("passwd"));
-		passwordField.sendKeys("Xcg7299bnSmMuRLp9ITw");
-
-		WebElement loginBtn = driver.findElement(By.name("submitLogin"));
-		loginBtn.click();
-		Thread.sleep(1000);
-
-		// Script B
+		String loginUrl = "webinar.test@gmail.com";
+		String password = "Xcg7299bnSmMuRLp9ITw";
+		driver.get(testURL);
+		
+		// Logging in
+		gens.sleepWait(1000);
+		ap.loginAdminPanel(loginUrl, password);
+		
+		// Finding elements
+		gens.sleepWait(1000);
 		WebElement navMenu = driver.findElement(By.id("nav-sidebar"));
 		List<WebElement> allElements = navMenu.findElements(By.tagName("a"));
 		List<String> elements = new ArrayList<String>();
@@ -42,29 +42,28 @@ public class TestHomeWork2 {
 			}
 		}
 
-		System.out.println(elements + "\n");
+		log.info(elements + "\n");
 
 		for (String e : elements) {
 			driver.findElement(By.linkText(e)).click();
-			Thread.sleep(1000);
+			gens.sleepWait(1000);
 
 			String title1 = driver.getTitle();
-			System.out.println(title1);
+			log.info(title1);
 
 			driver.navigate().refresh();
-			Thread.sleep(1000);
+			gens.sleepWait(1000);
 
 			String title2 = driver.getTitle();
 
 			if (title2.equals(title1)) {
-				System.out.println("Page refresh is successful\n");
+				log.info("Page refresh is successful\n");
 			} else {
-				System.out.println(
-						"Page refresh failure, expected title is " + title1 + " but actual title is " + title2 + "\n");
+				log.error("Page refresh failure, expected title is " + title1 + " but actual title is " + title2 + "\n");
 			}
 		}
 
-		System.out.println("Test finished");
+		log.info("Test finished");
 		
 		driver.quit();
 	}

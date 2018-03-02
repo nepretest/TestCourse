@@ -13,9 +13,8 @@ public class GenericMethods {
 	Random rand = new Random();
 	WebDriver driver;
 	
-	public GenericMethods(WebDriver driver, Actions act) {
+	public GenericMethods(WebDriver driver) {
 		this.driver = driver;
-		this.act = act;
 	}
 	
 	public String randomName( ) {
@@ -28,7 +27,7 @@ public class GenericMethods {
 		return randName;	
 	}
 	
-	public void moveToElementAct(String type, String locator) {
+	public void moveToElementAct(Actions act, String type, String locator) {
 		if(type.equalsIgnoreCase("xpath")) {
 			WebElement element = driver.findElement(By.xpath(locator));
 			act.moveToElement(element).perform();
@@ -50,6 +49,14 @@ public class GenericMethods {
 		} else if(type.equalsIgnoreCase("partialLinkText")) {
 			WebElement element = driver.findElement(By.partialLinkText(locator));
 			act.moveToElement(element).perform();
+		}
+	}
+	
+	public void sleepWait(int timeMs) {
+		try {
+		Thread.sleep(timeMs);
+		} catch (Exception e) {
+			System.out.println(e);
 		}
 	}
 	
