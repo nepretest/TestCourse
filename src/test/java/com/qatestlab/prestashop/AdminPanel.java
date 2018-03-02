@@ -12,10 +12,16 @@ public class AdminPanel {
 	Actions act;
 	Logger log;
 	
-	public AdminPanel(WebDriver driver, Actions act, Logger log) {
+	public AdminPanel(WebDriver driver, Logger log) {
 		this.driver = driver;
-		this.act = act;
 		this.log = log;
+	}
+	
+	// Login Object
+	public void loginAdminPanel(String email, String password) {
+		emailField(email);
+		passwordField(password);
+		clickOnSubmitLogin();
 	}
 	
 	public void emailField(String email) {
@@ -24,7 +30,7 @@ public class AdminPanel {
 		element.sendKeys(email);
 	}
 	
-	public void passwordfield(String password) {
+	public void passwordField(String password) {
 		log.info("Entering password :" + password);
 		WebElement element = driver.findElement(By.id("passwd"));
 		element.sendKeys(password);

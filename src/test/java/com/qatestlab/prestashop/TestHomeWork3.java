@@ -32,9 +32,7 @@ public class TestHomeWork3 {
 				driver.get(testURL);
 				
 				// Login
-				ap.emailField(loginUrl);
-				ap.passwordField(password);
-				ap.clickOnSubmitLogin();
+				ap.loginAdminPanel(loginUrl, password);
 				
 				// Adding category
 				genMeth.moveToElementAct(action, "xpath", "//li[@id='subtab-AdminCatalog']");
