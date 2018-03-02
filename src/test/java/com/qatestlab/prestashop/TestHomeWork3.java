@@ -17,9 +17,9 @@ public class TestHomeWork3 {
 				WebDriver driver = new ChromeDriver();
 				Actions action = new Actions(driver);
 				Logger log = LogManager.getLogger(TestHomeWork3.class.getName());
-				AdminPanel ap = new AdminPanel(driver, action, log);
+				AdminPanel ap = new AdminPanel(driver, log);
 				
-				GenericMethods genMeth = new GenericMethods(driver, action);
+				GenericMethods genMeth = new GenericMethods(driver);
 				String randName = genMeth.randomName();
 				
 				driver.manage().window().maximize();
@@ -33,12 +33,12 @@ public class TestHomeWork3 {
 				
 				// Login
 				ap.emailField(loginUrl);
-				ap.passwordfield(password);
+				ap.passwordField(password);
 				ap.clickOnSubmitLogin();
 				
 				// Adding category
-				genMeth.moveToElementAct("xpath", "//li[@id='subtab-AdminCatalog']");
-				genMeth.moveToElementAct("xpath", "//li[@id='subtab-AdminCategories']");
+				genMeth.moveToElementAct(action, "xpath", "//li[@id='subtab-AdminCatalog']");
+				genMeth.moveToElementAct(action, "xpath", "//li[@id='subtab-AdminCategories']");
 				ap.clickOnCategories();
 				ap.clickOnAddCategory();
 				ap.enterCategoryName(randName);
