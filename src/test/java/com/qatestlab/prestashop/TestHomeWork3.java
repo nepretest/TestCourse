@@ -19,7 +19,7 @@ public class TestHomeWork3 {
 				Logger log = LogManager.getLogger(TestHomeWork3.class.getName());
 				AdminPanel ap = new AdminPanel(driver, log);
 				
-				GenericMethods genMeth = new GenericMethods(driver);
+				GenericMethods genMeth = new GenericMethods();
 				String randName = genMeth.randomName();
 				
 				driver.manage().window().maximize();
@@ -35,8 +35,8 @@ public class TestHomeWork3 {
 				ap.loginAdminPanel(loginUrl, password);
 				
 				// Adding category
-				genMeth.moveToElementAct(action, "xpath", "//li[@id='subtab-AdminCatalog']");
-				genMeth.moveToElementAct(action, "xpath", "//li[@id='subtab-AdminCategories']");
+				genMeth.moveToElementAct(driver, action, "xpath", "//li[@id='subtab-AdminCatalog']");
+				genMeth.moveToElementAct(driver, action, "xpath", "//li[@id='subtab-AdminCategories']");
 				ap.clickOnCategories();
 				ap.clickOnAddCategory();
 				ap.enterCategoryName(randName);

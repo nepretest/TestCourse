@@ -17,7 +17,7 @@ public class TestHomeWork2_Script2 {
 		// Set up
 		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
-		GenericMethods gens = new GenericMethods(driver);
+		GenericMethods gens = new GenericMethods();
 		Logger log = LogManager.getLogger(TestHomeWork2_Script2.class.getName());
 		AdminPanel ap = new AdminPanel(driver, log);
 		driver.manage().window().maximize();
