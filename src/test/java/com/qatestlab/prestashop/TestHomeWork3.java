@@ -42,12 +42,12 @@ public class TestHomeWork3 {
 				ap.enterCategoryName(randName);
 				ap.clickSaveCategory();
 				
-				Assert.assertTrue(ap.findConfirmAlert().isDisplayed());
+				Assert.assertTrue(ap.findConfirmAlert().isDisplayed(), "Confirmation alert is not displayed");
 				log.info("Confirmation alert is found");
 				try {
 				ap.clickOnFilterCategoriesByName();
 				} finally {
-				Assert.assertTrue(ap.findCreatedCategory(randName).isDisplayed());
+				Assert.assertTrue(ap.findCreatedCategory(randName).isDisplayed(), "Created category is not found");
 				log.info("Created category is found");
 				}
 				
