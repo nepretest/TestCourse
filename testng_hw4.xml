@@ -1,0 +1,35 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Parameters HomeWork4" parallel="tests" thread-count="4">
+	<test name="Test chrome">
+		<parameter name="browser" value="chrome"></parameter>
+		<parameter name="adminurl" value="http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/"></parameter>
+		<parameter name="shopurl" value="http://prestashop-automation.qatestlab.com.ua/ru/"></parameter>
+		<classes>
+			<class name="com.qatestlab.prestashop.TestHomeWork4"></class>
+		</classes>
+	</test>
+	<!--   <test name="Test FF">
+		<parameter name="browser" value="firefox"></parameter>
+		<parameter name="adminurl" value="http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/"></parameter>
+		<parameter name="shopurl" value="http://prestashop-automation.qatestlab.com.ua/ru/"></parameter>
+		<classes>
+			<class name="com.qatestlab.prestashop.TestHomeWork4"></class>
+		</classes>
+	</test> 
+	<test name="Test IE">
+		<parameter name="browser" value="ie"></parameter>
+		<parameter name="adminurl" value="http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/"></parameter>
+		<parameter name="shopurl" value="http://prestashop-automation.qatestlab.com.ua/ru/"></parameter>
+		<classes>
+			<class name="com.qatestlab.prestashop.TestHomeWork4"></class>
+		</classes>
+	</test>
+	<test name="Test Nexus 5">
+		<parameter name="browser" value="Nexus 5"></parameter>
+		<parameter name="adminurl" value="http://prestashop-automation.qatestlab.com.ua/admin147ajyvk0/"></parameter>
+		<parameter name="shopurl" value="http://prestashop-automation.qatestlab.com.ua/ru/"></parameter>
+		<classes>
+			<class name="com.qatestlab.prestashop.TestHomeWork4"></class>
+		</classes>
+	</test> -->
+</suite>

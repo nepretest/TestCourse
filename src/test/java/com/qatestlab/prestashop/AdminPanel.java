@@ -4,12 +4,10 @@ import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
 
 public class AdminPanel {
 	
 	WebDriver driver;
-	Actions act;
 	Logger log;
 	
 	public AdminPanel(WebDriver driver, Logger log) {
@@ -26,7 +24,7 @@ public class AdminPanel {
 	
 	public void emailField(String email) {
 		log.info("Entering email :" + email);
-		WebElement element = driver.findElement(By.id("email"));
+		WebElement element = driver.findElement(By.name("email"));
 		element.sendKeys(email);
 	}
 	
@@ -43,13 +41,13 @@ public class AdminPanel {
 		log.info("Submit login bnt is clicked");
 	}
 	
-//	public void clickOnCatalogue() {
-//		log.info("Clicking on Catalogue");
-//		WebElement element = driver.findElement(By.xpath("//li[@id='subtab-AdminCatalog']/a"));
-//		element.click();
-//		log.info("Catalogue is clicked");
-//		
-//	}
+	public void clickOnCatalogue() {
+		log.info("Clicking on Catalogue");
+		WebElement element = driver.findElement(By.xpath("//li[@id='subtab-AdminCatalog']/a"));
+		element.click();
+		log.info("Catalogue is clicked");
+		
+	}
 
 	public void clickOnCategories() {
 		log.info("Clicking on Categories");
@@ -95,9 +93,57 @@ public class AdminPanel {
 	public WebElement findCreatedCategory(String name) {
 		log.info("Finding created category");
 		WebElement element = driver.findElement(By.xpath("//td[contains(text(),'" + name + "')]"));
+		log.info("Created category found");
 		return element;
 	}
 	
+	public void clickOnNewProductBtn() {
+		log.info("Clicking on new prod btn");
+		WebElement element = driver.findElement(By.id("page-header-desc-configuration-add"));
+		element.click();
+		log.info("New prod btn is clicked");
+	}
 	
+	public void newProductName(String newName) {
+		log.info("Entering " + newName + " to prod name");
+		WebElement element = driver.findElement(By.id("form_step1_name_1"));
+		element.clear();
+		element.sendKeys(newName);
+	}
+	
+	public void newProductQuantity(String quantity) {
+		log.info("Entering " + quantity + " to prod quantity");
+		WebElement element = driver.findElement(By.id("form_step1_qty_0_shortcut"));
+		element.clear();
+		element.sendKeys(quantity);
+	}
+	
+	public void newProductPrice(String price) {
+		log.info("Entering " + price + " to prod price");
+		WebElement element = driver.findElement(By.id("form_step1_price_shortcut"));
+		element.clear();
+		element.sendKeys(price);
+	}
+	
+	public void clickOnSwitcher() {
+		log.info("Clicking on switcher");
+		WebElement element = driver.findElement(By.xpath("//div[contains(@class,'switch-input')]"));
+		element.click();
+		log.info("Swither is clicked");
+		}
+	
+	public void popUpWindowClose() {
+		log.info("Closing the pop up window");
+		WebElement element = driver.findElement(By.xpath("//div[contains(@class,'growl-close')]"));
+		element.click();
+		log.info("Pop up window is closed");
+	}
+	
+	public void submitNewProduct() {
+		log.info("Clicking on submit new prod btn");
+		WebElement element = driver.findElement(By.id("submit"));
+		element.click();
+		log.info("Submit new prod btn is clicked");
+	}
 
 }

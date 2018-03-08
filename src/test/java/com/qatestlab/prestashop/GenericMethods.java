@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
+import org.apache.logging.log4j.Logger;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.DesiredCapabilities;
 
 public class GenericMethods {
 	
@@ -31,6 +33,17 @@ public class GenericMethods {
 			randName = randName + randLet;
 		}	
 		return randName;	
+	}
+	
+	public String randomPrice() {
+		double i = rand.nextDouble()*100;
+		String j = String.valueOf(Math.round(i*100)/100.00);
+		return j;	
+	}
+	
+	public String randomQuan() {
+		String i = String.valueOf(1 + rand.nextInt(100));
+		return i;
 	}
 	
 	public void moveToElementAct(WebDriver driver, Actions act, String type, String locator) {
@@ -66,23 +79,31 @@ public class GenericMethods {
 		}
 	}
 	
-	public WebDriver setUp(String browser) {
+	@SuppressWarnings("deprecation")
+	public WebDriver runBrowser(String browser, Logger log) {
 		WebDriver driver;
 		if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\drivers\\geckodriver.exe");
+			log.info("Runing Firefox");
 			driver = new FirefoxDriver();
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
+			log.info("Runing Chrome");
 			driver = new ChromeDriver();
 		} else if (browser.equalsIgnoreCase("ie")) {
-				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer.exe");
-				driver = new InternetExplorerDriver();
+			// Using IEDriver x32 to get IE faster
+				System.setProperty("webdriver.ie.driver", System.getProperty("user.dir") + "\\drivers\\IEDriverServer32.exe");
+				DesiredCapabilities capability = new DesiredCapabilities();
+				capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+				log.info("Runing Ieternet Explorer");
+				driver = new InternetExplorerDriver(capability);
 		} else {
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
 			mobileEmulation.put("deviceName", browser);
 			ChromeOptions chromeOptions = new ChromeOptions();
 			chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
 			System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
+			log.info("Runing " + browser + " mobile device emulation on chrome");
 			driver = new ChromeDriver(chromeOptions);
 		}
 		driver.manage().window().maximize();
