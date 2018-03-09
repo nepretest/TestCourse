@@ -29,7 +29,7 @@ public class MainPage {
 //		log.info("More Info bnt is clicked");
 //	}
 	
-		public String findProductQuantity(String quantity) {
+		public String createdProductQuantity(String quantity) {
 		log.info("Verifying new prod quantity");
 		String element = driver.findElement(By.xpath("//div[@class='product-quantities']/span")).getText();
 		// Cutting "товары" from the span
@@ -39,8 +39,15 @@ public class MainPage {
 	
 	public WebElement findCreatedProduct(String newName) {
 		log.info("Verifying new prod");
-		WebElement element = driver.findElement(By.linkText(newName));
+		WebElement element = driver.findElement(By.xpath("//div[@class='products row']//a[contains(text(),'"+ newName + "')]"));
 		return element;
+	}
+	
+	public void clickOnCreatedProd(String newName) {
+		log.info("Clicking on new product link");
+		WebElement element = driver.findElement(By.xpath("//div[@class='products row']//a[contains(text(),'"+ newName + "')]"));
+		element.click();
+		log.info("New product link is clicked");
 	}
 	
 	public String createdProductPrice() {
