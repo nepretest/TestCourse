@@ -29,7 +29,7 @@ public class TestHomeWork4 {
 	WebDriverWait wait;
 
 	Logger log = LogManager.getLogger(TestHomeWork4.class.getName());
-	GenericMethods gens = new GenericMethods(log);
+	GenericMethods gm = new GenericMethods(log);
 	SoftAssert sa = new SoftAssert();
 
 	@DataProvider(name = "LoginParameters")
@@ -42,12 +42,12 @@ public class TestHomeWork4 {
 	public void setUp(String browser, String adminurl, String shopurl) {
 		adminURL = adminurl;
 		shopURL = shopurl;
-		randomName = gens.randomName();
-		randomPrice = gens.randomPrice();
-		randomQuan = gens.randomQuan();
+		randomName = gm.randomName();
+		randomPrice = gm.randomPrice();
+		randomQuan = gm.randomQuan();
 		log.info("New product values are: Name - " + randomName + ", Price - " + randomPrice + ", Quantity - "
 				+ randomQuan);
-		driver = gens.runBrowser(browser);
+		driver = gm.runBrowser(browser);
 		ap = new AdminPanel(driver, log);
 		mp = new MainPage(driver, log);
 		driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
@@ -56,8 +56,7 @@ public class TestHomeWork4 {
 
 	@Test(dataProvider = "LoginParameters")
 	public void loginAdmin(String email, String password) {
-		log.info("Navigating to " + adminURL);
-		driver.get(adminURL);
+		gm.getURL(driver, adminURL);
 		ap.loginToAdminPanel(email, password);
 	}
 
@@ -84,8 +83,7 @@ public class TestHomeWork4 {
 
 	@Test(dependsOnMethods = { "finishNewProdCreation" })
 	public void newProdVerification() {
-		log.info("Navigating to " + shopURL);
-		driver.get(shopURL);
+		gm.getURL(driver, shopURL);
 		mp.clickOnAllProducts();
 		WebElement newProd = wait.until(ExpectedConditions.visibilityOf(mp.findCreatedProduct(randomName)));
 		Assert.assertTrue(newProd.isDisplayed(), "New product is not found");
@@ -109,8 +107,7 @@ public class TestHomeWork4 {
 
 	@AfterClass
 	public void quit() {
-		driver.quit();
-		log.info("Test finished/n");
+		gm.endTest(driver);
 	}
 
 }

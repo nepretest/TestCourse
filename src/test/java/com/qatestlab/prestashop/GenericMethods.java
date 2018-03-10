@@ -12,6 +12,7 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
+import org.testng.Reporter;
 
 public class GenericMethods {
 	
@@ -24,6 +25,7 @@ public class GenericMethods {
 	}
 
 	public void getURL(WebDriver driver, String url) {
+		Reporter.log("Navigating to " + url);
 		log.info("Navigating to " + url);
 		driver.get(url);
 	}
@@ -93,11 +95,13 @@ public class GenericMethods {
 		WebDriver driver;
 		if (browser.equalsIgnoreCase("firefox")) {
 			System.setProperty("webdriver.gecko.driver", System.getProperty("user.dir") + "\\drivers\\geckodriver.exe");
+			Reporter.log("Running Firefox");
 			log.info("Running Firefox");
 			driver = new FirefoxDriver();
 		} else if (browser.equalsIgnoreCase("chrome")) {
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
+			Reporter.log("Running Chrome");
 			log.info("Running Chrome");
 			driver = new ChromeDriver();
 		} else if (browser.equalsIgnoreCase("ie")) {
@@ -106,6 +110,7 @@ public class GenericMethods {
 					System.getProperty("user.dir") + "\\drivers\\IEDriverServer32.exe");
 			DesiredCapabilities capability = new DesiredCapabilities();
 			capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+			Reporter.log("Running Ieternet Explorer");
 			log.info("Running Ieternet Explorer");
 			driver = new InternetExplorerDriver(capability);
 		} else {
@@ -115,6 +120,7 @@ public class GenericMethods {
 			chromeOptions.setExperimentalOption("mobileEmulation", mobileEmulation);
 			System.setProperty("webdriver.chrome.driver",
 					System.getProperty("user.dir") + "\\drivers\\chromedriver.exe");
+			Reporter.log("Running " + browser + " mobile device emulation on chrome");
 			log.info("Running " + browser + " mobile device emulation on chrome");
 			driver = new ChromeDriver(chromeOptions);
 		}
