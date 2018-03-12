@@ -10,12 +10,12 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.ie.InternetExplorerOptions;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.testng.Reporter;
 
 public class GenericMethods {
-	
+
 	Actions act;
 	Logger log;
 	Random rand = new Random();
@@ -56,32 +56,33 @@ public class GenericMethods {
 		String i = String.valueOf(1 + rand.nextInt(100));
 		return i;
 	}
-	
-//	public void moveToElementAct(WebDriver driver, Actions act, String type, String locator) {
-//		if(type.equalsIgnoreCase("xpath")) {
-//			WebElement element = driver.findElement(By.xpath(locator));
-//			act.moveToElement(element).perform();
-//		} else if (type.equalsIgnoreCase("css")) {
-//			WebElement element = driver.findElement(By.cssSelector(locator));
-//			act.moveToElement(element).perform();
-//		} else if (type.equalsIgnoreCase("id")) {
-//			WebElement element = driver.findElement(By.id(locator));
-//			act.moveToElement(element).perform();
-//		} else if(type.equalsIgnoreCase("name")) {
-//			WebElement element = driver.findElement(By.name(locator));
-//			act.moveToElement(element).perform();
-//		} else if(type.equalsIgnoreCase("class")) {
-//			WebElement element = driver.findElement(By.className(locator));
-//			act.moveToElement(element).perform();
-//		} else if(type.equalsIgnoreCase("linktext")) {
-//			WebElement element = driver.findElement(By.linkText(locator));
-//			act.moveToElement(element).perform();
-//		} else if(type.equalsIgnoreCase("partialLinkText")) {
-//			WebElement element = driver.findElement(By.partialLinkText(locator));
-//			act.moveToElement(element).perform();
-//		}
-//	}
-	
+
+	// public void moveToElementAct(WebDriver driver, Actions act, String type,
+	// String locator) {
+	// if(type.equalsIgnoreCase("xpath")) {
+	// WebElement element = driver.findElement(By.xpath(locator));
+	// act.moveToElement(element).perform();
+	// } else if (type.equalsIgnoreCase("css")) {
+	// WebElement element = driver.findElement(By.cssSelector(locator));
+	// act.moveToElement(element).perform();
+	// } else if (type.equalsIgnoreCase("id")) {
+	// WebElement element = driver.findElement(By.id(locator));
+	// act.moveToElement(element).perform();
+	// } else if(type.equalsIgnoreCase("name")) {
+	// WebElement element = driver.findElement(By.name(locator));
+	// act.moveToElement(element).perform();
+	// } else if(type.equalsIgnoreCase("class")) {
+	// WebElement element = driver.findElement(By.className(locator));
+	// act.moveToElement(element).perform();
+	// } else if(type.equalsIgnoreCase("linktext")) {
+	// WebElement element = driver.findElement(By.linkText(locator));
+	// act.moveToElement(element).perform();
+	// } else if(type.equalsIgnoreCase("partialLinkText")) {
+	// WebElement element = driver.findElement(By.partialLinkText(locator));
+	// act.moveToElement(element).perform();
+	// }
+	// }
+
 	public void sleepWait(int timeMs) {
 		try {
 			Thread.sleep(timeMs);
@@ -89,8 +90,7 @@ public class GenericMethods {
 			System.out.println(e);
 		}
 	}
-	
-	@SuppressWarnings("deprecation")
+
 	public WebDriver runBrowser(String browser) {
 		WebDriver driver;
 		if (browser.equalsIgnoreCase("firefox")) {
@@ -108,11 +108,11 @@ public class GenericMethods {
 			// Using IEDriver x32 to get IE faster
 			System.setProperty("webdriver.ie.driver",
 					System.getProperty("user.dir") + "\\drivers\\IEDriverServer32.exe");
-			DesiredCapabilities capability = new DesiredCapabilities();
-			capability.setCapability(InternetExplorerDriver.INTRODUCE_FLAKINESS_BY_IGNORING_SECURITY_DOMAINS, true);
+			InternetExplorerOptions options = new InternetExplorerOptions();
+			options.introduceFlakinessByIgnoringSecurityDomains();
 			Reporter.log("Running Ieternet Explorer");
 			log.info("Running Ieternet Explorer");
-			driver = new InternetExplorerDriver(capability);
+			driver = new InternetExplorerDriver(options);
 		} else {
 			Map<String, String> mobileEmulation = new HashMap<String, String>();
 			mobileEmulation.put("deviceName", browser);
@@ -128,5 +128,5 @@ public class GenericMethods {
 		return driver;
 
 	}
-	
+
 }
